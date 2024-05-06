@@ -1,0 +1,29 @@
+{% extends "BlogApplication/base.html" %}
+{% block content %}
+<article class="media content-section">
+
+        <div class="mt-5">
+            {% if results %}
+                <h2>Search Results:</h2>
+                {% for blog in results %}
+                   <img class="rounded-circle article-img "src="{{ blog.author.profile.image.url }}">
+                   <div class="media-body">
+
+                       <div class="article-metadata">
+
+                        <div class="card-body">
+
+                            <a class="mr-2" href="{% url 'user-posts' blog.author.username%}">{{ blog.author }}</a>
+                            <small class="text-muted">{{ blog.date_posted|date:"F d, Y" }}</small>
+                            <h2 class="article-title">{{ blog.title }}</h2>
+                            <p class="card-text">{{ blog.content|linebreaksbr }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No results found.</p>
+            {% endif %}
+        </div>
+    </div>
+</article>
+{% endblock content %}
